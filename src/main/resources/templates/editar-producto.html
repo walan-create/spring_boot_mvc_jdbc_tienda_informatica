@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+    <!--Caja padre-->
+    <div class="container mx-auto px-4">
+        <form  th:action="@{/productos/editar/__${producto.codigo}__}" th:object="${producto}" method="post" >
+
+            <!--Titulo de la tabla y boton Guardar-->
+            <div class="flex flex-row py-4 items-center border-b-2 p-2">
+
+                <div class="basis-1/2 text-4xl">
+                    <h1>Editar Producto</h1>
+                </div>
+
+                <div class="basis-1/2 flex justify-center">
+                    <!--RECUERDA: por defecto, button es type="submit",
+                    para controlar por js el envío usa type="button"-->
+                    <button class="btn btn-blue float-right">Guardar</button>
+                </div>
+
+            </div>
+
+            <!-- Fila de Código -->
+            <div class="flex flex-row my-0.5">
+
+                <div class="basis-1/2">
+                    <label>Código</label>
+                </div>
+                <div class="basis-1/2">
+                    <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{codigo}" readonly="readonly"/>
+                </div>
+
+            </div>
+
+            <!-- Fila de Nombre -->
+            <div class="flex flex-row my-0.5">
+
+                <div class="basis-1/2">
+                    <label>Nombre</label>
+                </div>
+                <div class="basis-1/2">
+                    <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{nombre}"/>
+                </div>
+
+            </div>
+
+            <!-- Fila de Precio -->
+            <div class="flex flex-row my-0.5">
+
+                <div class="basis-1/2">
+                    <label>Precio</label>
+                </div>
+                <div class="basis-1/2">
+                    <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{precio}"/>
+                </div>
+
+            </div>
+
+            <!-- Fila de Nombre Fabricante (desplegable) -->
+            <div class="flex flex-row my-0.5">
+                <div class="basis-1/2">Fabricante</div>
+                <div class="basis-1/2">
+                    <select class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{id_fabricante}" >
+                        <option value="" disabled selected>Seleccione un fabricante</option>
+                        <option th:each="fabricante : ${listFab}"
+                                th:value="${fabricante.codigo}"
+                                th:text="${fabricante.nombre}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+    </form>
+</div>
+
+</body>
+</html>

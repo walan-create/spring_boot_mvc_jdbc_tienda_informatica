@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+    <!--Caja padre-->
+    <div class="container mx-auto px-4">
+
+        <!--Titulo de la tabla y boton crear-->
+        <div class="flex flex-row py-4 items-center border-b-2">
+            <div class="basis-1/2 text-4xl">
+                <h1>Productos</h1>
+            </div>
+            <form class="basis-1/2 flex justify-center" action="/">
+                <button class="btn btn-blue">Menú Principal</button>
+            </form>
+            <form class="basis-1/2 flex justify-center" action="/productos/crear">
+                <!--RECUERDA: por defecto, button es type="submit",
+                para controlar por js el envío usa type="button"-->
+                <button class="btn btn-blue float-right">Crear</button>
+            </form>
+        </div>
+
+        <!--Cabecera de la tabla con los atributos-->
+        <div class="flex flex-row border-b-2">
+            <div class="basis-1/2 text-2xl">Código</div>
+            <div class="basis-1/2 text-2xl">Nombre</div>
+            <div class="basis-1/2 text-2xl">Precio</div>
+            <div class="basis-1/2 text-2xl">Fabricante</div>
+            <div class="basis-1/2 text-center text-2xl">Acción</div>
+        </div>
+
+        <!--DIV que recorre la lista deseada y lo imprime en una tabla-->
+        <div class="flex flex-row my-0.5"  th:each="producto : ${listaProductos}">
+            <!-- Imprime el campo codigo -->
+            <div class="basis-1/3" th:text="${producto.codigo}">Código</div>
+            <!-- Imprime el campo nombre -->
+            <div class="basis-1/3" th:text="${producto.nombre}">Nombre</div>
+            <!-- Imprime el campo codigo -->
+            <div class="basis-1/3" th:text="${producto.precio}">Precio</div>
+            <!-- Imprime el nombre del Fabricante -->
+
+            <!-- <div class="basis-1/3" th:text="${producto.id_fabricante}">Fabricante</div>-->
+
+            <!-- Recorre la lista de fabs y si el id coincide con el del producto imprime el nombre -->
+            <div class="text-xl basis-1/3"
+                 th:each="fabricante : ${listFab}"
+                 th:if="${fabricante.codigo == producto.id_fabricante}"
+                 th:text="${fabricante.nombre}">Fabricante
+            </div>
+
+            <!-- Botones de acción -->
+            <div class="flex justify-center">
+                <form th:action="@{/productos/__${producto.codigo}__}">
+                    <button class="mx-0.5 btn btn-green">Detalle</button>
+                </form>
+                <form  th:action="@{/productos/editar/}+${producto.codigo}" method="get">
+                    <button class="mx-0.5 btn btn-blue">Editar</button>
+                </form>
+                <form th:action="@{/productos/borrar/__${producto.codigo}__}" method="post">
+                    <button class="mx-0.5 btn btn-red">Eliminar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

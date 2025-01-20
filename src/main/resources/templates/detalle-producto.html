@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Producto</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+<div class="container mx-auto px-4">
+
+    <!--Titulo de la tabla y boton Cancelar -->
+    <div class="flex flex-row py-4 items-center border-b-2 p-2">
+        <div class="basis-1/2 text-4xl">
+            <h1>Detalle Producto</h1>
+        </div>
+        <form class="basis-1/2 flex justify-center" action="/productos" >
+            <button class="btn btn-gray float-right">Volver</button>
+        </form>
+    </div>
+
+    <!-- Fila de Código -->
+    <div class="flex flex-row my-0.5">
+        <div class="basis-1/2">
+            <label>Código</label>
+        </div>
+        <div class="basis-1/2">
+            <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:value="${producto.codigo}" value="Código" readonly="readonly"/>
+        </div>
+    </div>
+
+    <!-- Fila de Nombre -->
+    <div class="flex flex-row my-0.5">
+        <div class="basis-1/2">
+            <label>Nombre</label>
+        </div>
+        <div class="basis-1/2">
+            <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:value="${producto.nombre}" value="Nombre" readonly="readonly"/>
+        </div>
+    </div>
+
+    <!-- Fila de Código -->
+    <div class="flex flex-row my-0.5">
+        <div class="basis-1/2">
+            <label>Precio</label>
+        </div>
+        <div class="basis-1/2">
+            <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:value="${producto.precio}" value="Precio" readonly="readonly"/>
+        </div>
+    </div>
+
+    <!-- Fila de Fabricante -->
+    <div class="flex flex-row my-0.5">
+        <div class="basis-1/2">
+            <label>Fabricante</label>
+        </div>
+        <div class="basis-1/2">
+            <div class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight"
+                 th:each="fabricante : ${listFab}"
+                 th:if="${fabricante.codigo == producto.id_fabricante}"
+                 th:text="${fabricante.nombre}">Fabricante
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

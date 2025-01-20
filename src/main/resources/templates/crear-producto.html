@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Productos</title>
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+
+    <div class="container mx-auto px-4">
+
+        <!-- Formulario Padre que permite ingresar datos y mandarlos al controller para crear-->
+        <form th:action="@{/productos/crear}" th:object="${producto}" method="post">
+
+            <!--Titulo de la pagina y boton Guardar-->
+            <div class="flex flex-row py-4 items-center border-b-2 p-2">
+                <div class="basis-1/2 text-4xl">
+                    <h1>Crear Producto</h1>
+                </div>
+                <div class="basis-1/2 flex justify-center">
+                    <!--RECUERDA: por defecto, button es type="submit",
+                    para controlar por js el envío usa type="button"-->
+                    <button class="btn btn-blue float-right">Guardar</button>
+                </div>
+            </div>
+
+            <!-- Fila de Nombre-->
+            <div class="flex flex-row my-0.5">
+                <div class="basis-1/2">Nombre</div>
+                <div class="basis-1/2">
+                    <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{nombre}" />
+                </div>
+            </div>
+
+            <!-- Fila de Precio-->
+            <div class="flex flex-row my-0.5">
+                <div class="basis-1/2">Precio</div>
+                <div class="basis-1/2">
+                    <input class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{precio}" />
+                </div>
+            </div>
+
+            <!-- Fila de Nombre Fabricante (desplegable) -->
+            <div class="flex flex-row my-0.5">
+                <div class="basis-1/2">Fabricante</div>
+                <div class="basis-1/2">
+                    <select class="shadow appearance-none border rounded w-1/2 py-2 px-3 text-gray-700 leading-tight" th:field="*{id_fabricante}" >
+                        <option value="" disabled selected>Seleccione un fabricante</option>
+                        <option th:each="fabricante : ${listFab}"
+                                th:value="${fabricante.codigo}"
+                                th:text="${fabricante.nombre}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

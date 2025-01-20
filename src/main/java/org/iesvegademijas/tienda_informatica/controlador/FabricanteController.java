@@ -45,13 +45,13 @@ public class FabricanteController {
 	}
 	
 	@GetMapping("/fabricantes/crear")
-	public String crear(Model model) {
-		
-		Fabricante fabricante = new Fabricante();
-		model.addAttribute("fabricante", fabricante);
+	public String crear(@ModelAttribute("fabricante")Fabricante fabricante){
+
+		//Al especificar el @ModelAttribute no necesitamos instanciar el Fabricante
+		//Fabricante fabricante = new Fabricante();
+		//model.addAttribute("fabricante", fabricante);
 		
 		return "crear-fabricante";
-		
 	}
 	
 	@PostMapping("/fabricantes/crear")
